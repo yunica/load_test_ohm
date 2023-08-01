@@ -1,16 +1,20 @@
 
 services:
   master:
-    image: locustio/locust
+    image: ohm/locust
+    build:
+      context: .
     ports:
       - "8089:8089"
     volumes:
       - ./:/mnt/locust
-    command: -f /mnt/locust/ohm.py --master -H http://master:8089
+    command: -f /mnt/locust/muni_huam.py --master -H http://master:8089
 
   worker:
-    image: locustio/locust
+    image: ohm/locust
+    build:
+      context: .
     volumes:
       - ./:/mnt/locust
-    command: -f /mnt/locust/ohm.py --worker --master-host master
+    command: -f /mnt/locust/muni_huam.py --worker --master-host master
 
